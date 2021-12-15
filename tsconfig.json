@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "strict": true
+  },
+  "exclude": [
+    "./src/node_modules",
+    "./src/javascript",
+    "./src/views"
+  ]
+}

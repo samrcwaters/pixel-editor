@@ -1,0 +1,26 @@
+{
+  "name": "pixel-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samrcwaters/pixel-editor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samrcwaters/pixel-editor/issues"
+  },
+  "homepage": "https://github.com/samrcwaters/pixel-editor#readme",
+  "dependencies": {
+    "knockout": "^3.5.1"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "gulp": "^4.0.2"
+  }
+}
