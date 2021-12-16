@@ -17,7 +17,13 @@
   },
   "homepage": "https://github.com/samrcwaters/pixel-editor#readme",
   "dependencies": {
-    "knockout": "^3.5.1"
+    "del": "^6.0.0",
+    "errorify": "^0.3.1",
+    "gulp-typings": "^2.0.4",
+    "knockout": "^3.5.1",
+    "tsify": "^5.0.4",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^4.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
