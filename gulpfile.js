@@ -1,55 +1,40 @@
 /**
- * Reference: https://techblog.topdesk.com/coding/front-end-with-typescript-tutorial-step-6-gulp/
+ * Reference: https://www.typescriptlang.org/docs/handbook/gulp.html
  */
 
 const gulp = require("gulp");
 const browserify = require("browserify");
-const watchify = require("watchify");
-const errorify = require("errorify");
-const del = require("del");
 const source = require("vinyl-source-stream");
+const tsify = require("tsify");
+const del = require("del");
+const paths = {
+  pages: ["src/views/*.html"],
+};
 
-function createBrowserifier(entry) {
-  return browserify({
+function copyHtml(cb) {
+  // `src` creates a stream for reading file objects
+  gulp.src(paths.pages).pipe(gulp.dest("dist"));
+  cb();
+}
+
+async function clean(cb) {
+  await del(["./dist/**/*"]);
+  cb();
+}
+
+function browserifySrc(cb) {
+  browserify({
     basedir: ".",
     debug: true,
-    entries: [entry],
+    entries: ["src/ts/main.ts"],
     cache: {},
     packageCache: {},
   })
     .plugin(tsify)
-    .plugin(watchify)
-    .plugin(errorify);
-}
-
-function bundle(browserifier, bundleName, destination) {
-  return browserifier
     .bundle()
-    .pipe(source(bundleName))
-    .pipe(gulp.dest(destination));
-}
-
-async function clean(cb) {
-  await del(["./src/javascript/**/*"]);
+    .pipe(source("bundle.js"))
+    .pipe(gulp.dest("dist"));
   cb();
 }
 
-function tscBrowserifySrc(cb) {
-  bundle(createBrowserifier("./src/typescript/main.ts"), "bundle.js", "javascript");
-  cb();
-}
-
-// function defaultTask(cb) {
-//   runSequence(["clean", "installTypings"], "tsc-browserify-src", () => {
-//     console.log("Watching...");
-//     gulp.watch(["./src/typescript/**/*.ts"], ["tsc-browserify-src"]);
-//   });
-//   cb();
-// }
-
-exports.clean = clean;
-
-exports.default = gulp.series(
-  clean,
-  tscBrowserifySrc
-);
+exports.default = gulp.series(clean, gulp.parallel(copyHtml, browserifySrc));
