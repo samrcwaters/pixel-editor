@@ -3,7 +3,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "strict": true
+    "noUnusedLocals": true
   },
   "exclude": [
     "./src/node_modules",
